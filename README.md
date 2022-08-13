@@ -75,6 +75,17 @@ Start pipeline
 #### pipiline structure
 ![pipeline](images/pipeline001.png)    
 
+# declarative pipeline 
+is way of saving the pipeline defintion with the code base.  
+generally [Jenkinsfile](./jenkins-pipeline-demo-2/Jenkinsfile) stored at root but not limited 
+as far as it is defined in jenkins project script path. like below
+![script path](./images/pipeline-script-path.png)  
+
+# Pipeline Syntax 
+Jenkinsfile is based on groovy script.  
+refer [official syntax][5]  
+Study of declative pipeline sections are covered [here](./pipeline-sections.md)
+
 
 
 
@@ -87,3 +98,4 @@ to install goto `Manage jenkins > manage plugins > search "blue ocean" > install
 [2]: https://github.com/jenkinsci/docker/blob/master/README.md
 [3]: [jenkins.io/doc/pipeline/steps/]
 [4]: [http://localhost:8080/env-vars.html]
+[5]: [https://www.jenkins.io/doc/book/pipeline/syntax/#pipeline-syntax]

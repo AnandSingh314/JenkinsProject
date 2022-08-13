@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+    environment {
+        RELEASE='20.3.5'
+    }
+
+    stages {
+        stage('Build') {
+            agent any
+            environment {
+                LOG_LEVEL = 'INFO'
+            }
+            steps {
+                echo "Message from Build>steps release = ${RELEASE} log_level = ${LOG_LEVEL}"
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo "Message from Deploy>steps release = ${RELEASE}"
+                // $LOG_LEVEL is unaccessible 
+            }
+        }
+
+        stage('Deploy') {
+            input {
+                message "Should we continue?"
+                ok "Yes, we should."
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                }
+            }
+            steps {
+                echo "Hello ${PERSON} from release = ${RELEASE}"
+            }
+        }
+    }
+
+    post {
+        always {
+            echo "always running steps in post"
+        }
+    }
+}
