@@ -6,8 +6,8 @@ pipeline {
         echo 'echo message from demo stage $DEMO_VAR'
         sh '''
           echo "echo shell message from demo stage shell $BUILD_NUMBER & $DEMO_VAR"
-          chmod a+x scripts/init.sh
-          ./scripts/init.sh
+          chmod a+x jenkins-pipeline-demo-1/scripts/init.sh
+          ./jenkins-pipeline-demo-1/scripts/init.sh
         '''
       }
     }
