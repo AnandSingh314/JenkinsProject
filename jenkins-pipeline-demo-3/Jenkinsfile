@@ -33,7 +33,7 @@ pipeline {
             }
             when {
                 expression {
-                    params.SHOW_MESSAGE 
+                    return params.SHOW_MESSAGE 
                 }
             }
             steps {
