@@ -4,6 +4,10 @@ pipeline {
         APP_NAME='Demo 3 Parameter Test App'
     }
 
+    parameters {
+        booleanParam(name: 'SHOW_MESSAGE', defaultValue: false, description: 'Show greetings')
+    }
+
     stages {
         stage('Build') {
             agent any
@@ -28,7 +32,6 @@ pipeline {
                 ok "Yes, we should."
                 parameters {
                     string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-                    booleanParam(name: 'SHOW_MESSAGE', defaultValue: false, description: 'Show greetings')
                 }
             }
             when {
