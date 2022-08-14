@@ -17,7 +17,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo "Deploy messages = ${APP_NAME}"
+                echo "Test messages = ${APP_NAME}"
                 // $LOG_LEVEL is unaccessible 
             }
         }
@@ -32,9 +32,10 @@ pipeline {
                 }
             }
             when {
-                equals expected: true, actual: SHOW_MESSAGE
+                expression {
+                    params.SHOW_MESSAGE 
+                }
             }
-
             steps {
                 echo "Hello ${PERSON} from release = ${APP_NAME}"
             }
