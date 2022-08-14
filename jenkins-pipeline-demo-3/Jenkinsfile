@@ -1,0 +1,49 @@
+pipeline {
+    agent any
+    environment {
+        APP_NAME='Demo 3 Parameter Test App'
+    }
+
+    stages {
+        stage('Build') {
+            agent any
+            environment {
+                LOG_LEVEL = 'INFO'
+            }
+            steps {
+                echo "Build message ${APP_NAME} [${LOG_LEVEL}]"
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo "Deploy messages = ${APP_NAME}"
+                // $LOG_LEVEL is unaccessible 
+            }
+        }
+
+        stage('Deploy') {
+            input {
+                message "Should we continue?"
+                ok "Yes, we should."
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                    booleanParam(name: 'SHOW_MESSAGE', defaultValue: false, description: 'Show greetings')
+                }
+            }
+            when {
+                equals expected: true, actual: SHOW_MESSAGE
+            }
+
+            steps {
+                echo "Hello ${PERSON} from release = ${APP_NAME}"
+            }
+        }
+    }
+
+    post {
+        always {
+            echo "completed ${APP_NAME}"
+        }
+    }
+}
